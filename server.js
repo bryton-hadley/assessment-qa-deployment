@@ -30,13 +30,18 @@ rollbar.log('Hello world!')
 //setiing up the middlewear endpoints to send all files 
 app.get('/', (req,res) => {
     
-    res.sendFile(path.join(__dirname, '../public/styles'))
+    res.sendFile(path.join(__dirname, '/public/index.html'))
 
 })
+//setting up end point for the css page
+app.get('/styles', (req,res) => {
 
-app.get('/', (req,res) => {
+    res.sendFile(path.join(__dirname, '/public/index.css'))
+})
+//setting up end point for js
+app.get('/js', (res, req) => {
 
-    res.sendFile(path.join(__dirname, '/public/js'))
+    res.sendFile(path.join(__dirname, '/public/index.js'))
 })
 
 app.get('/api/robots', (req, res) => {
