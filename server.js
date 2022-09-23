@@ -29,7 +29,7 @@ rollbar.log('Hello world!')
 
 //setiing up the middlewear endpoints to send all files 
 app.get('/', (req,res) => {
-    
+    rollbar.log('It worked')
     res.sendFile(path.join(__dirname, '/public/index.html'))
 
 })
@@ -48,6 +48,7 @@ app.get('/api/robots', (req, res) => {
     try {
         res.status(200).send(botsArr)
     } catch (error) {
+        rollbar.log('Bots did not load!+')
         console.log('ERROR GETTING BOTS', error)
         res.sendStatus(400)
     }
