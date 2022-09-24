@@ -170,7 +170,7 @@ const getAllBots = () => {
         .then(({data}) => {
             allBotsDiv.innerHTML = ''
         
-            data.forEach(bot => {
+            data.forEach((bot) => {
                 let botHtml = makeRobotDisplayCard(bot)
                 allBotsDiv.innerHTML += botHtml
             })

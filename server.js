@@ -39,16 +39,17 @@ app.get('/styles', (req,res) => {
     res.sendFile(path.join(__dirname, '/public/index.css'))
 })
 //setting up end point for js
-app.get('/js', (res, req) => {
+app.get('/js', (req, res) => {
 
     res.sendFile(path.join(__dirname, '/public/index.js'))
 })
 
 app.get('/api/robots', (req, res) => {
     try {
-        res.status(200).send(botsArr)
+        res.send(200).status(botsArr)
     } catch (error) {
-        rollbar.log('Bots did not load!+')
+        //adding a roll bar log to log the error of the bots not working 
+        rollbar.log('Bots did not load!')
         console.log('ERROR GETTING BOTS', error)
         res.sendStatus(400)
     }
@@ -61,6 +62,8 @@ app.get('/api/robots/five', (req, res) => {
         let compDuo = shuffled.slice(6, 8)
         res.status(200).send({choices, compDuo})
     } catch (error) {
+        //setting up rollbar 
+        rollbar.log("Couldn't select five bots ")
         console.log('ERROR GETTING FIVE BOTS', error)
         res.sendStatus(400)
     }
@@ -89,6 +92,8 @@ app.post('/api/duel', (req, res) => {
             res.status(200).send('You lost!')
         } else {
             playerRecord.losses++
+            //setting up a rollbar long to log and see if you won is working 
+            rollbar.log('YOU WON is working!')
             res.status(200).send('You won!')
         }
     } catch (error) {
@@ -101,6 +106,8 @@ app.get('/api/player', (req, res) => {
     try {
         res.status(200).send(playerRecord)
     } catch (error) {
+        //setting uo a rollbar log to loga th error
+        rollbar.log('ERROR CAN"T GET PLAYER STATUS')
         console.log('ERROR GETTING PLAYER STATS', error)
         res.sendStatus(400)
     }
